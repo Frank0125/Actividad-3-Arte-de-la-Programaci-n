@@ -1,0 +1,30 @@
+@echo off
+set ARG=%1
+
+if "%ARG%"=="detallado" (
+    set DETALLE=true
+) else (
+    set DETALLE=false
+)
+
+for /l %%i in (1,1,5) do (
+    echo Ejecución %%i
+    if "%DETALLE%"=="true" (
+        echo Información detallada:
+        hostname
+        ipconfig /all
+        tasklist
+        wmic cpu get caption
+        wmic os get caption
+        wmic memorychip get capacity
+        wmic diskdrive get size
+        wmic bios get serialnumber
+        wmic logicaldisk get size,freespace
+    ) else (
+        echo Información básica:
+        wmic cpu get caption
+        wmic memorychip get capacity
+        wmic diskdrive get size
+    )
+)
+
